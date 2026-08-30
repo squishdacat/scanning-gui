@@ -1,7 +1,7 @@
 {
-  description = "RaspberryPi Scanning Frontend";
+  description = "Scanning kiosk GUI";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs =
     { self, nixpkgs }:
@@ -9,14 +9,27 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
       ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      forAllSystems = f: nixpkgs.lib.genAttrs systems f;
     in
     {
-      packages = forAllSystems (pkgs: {
-        default = pkgs.python3Packages.callPackage ./package.nix { };
-      });
+      # This is what makes it feel native: applying the overlay adds
+      # `scanning-gui` to pkgs, so pkgs.scanning-gui works everywhere.
+      overlays.default = final: prev: {
+        scanning-gui = final.python3Packages.callPackage ./package.nix { };
+      };
+
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+          };
+        in
+        {
+          default = pkgs.scanning-gui;
+        }
+      );
     };
 }
