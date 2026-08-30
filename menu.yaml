@@ -1,0 +1,61 @@
+Menu:
+  Supermarkets:
+    type: menu
+    options:
+      Drakes:
+        type: scan
+        file-name: reciept-drakes
+      Adelaide Fresh:
+        type: scan
+        file-name: reciept-adelaideFresh
+      Woolworths:
+        type: scan
+        file-name: reciept-woolworths
+      Pasadena Foodland:
+        type: scan
+        file-name: reciept-foodlandPasadena
+        long-paper-mode: true
+      Other:
+        type: scan
+        file-name: reciept-supermarketOther
+  Bills:
+    type: menu
+    options:
+      Council Rates:
+        type: scan
+        file-name: bill-council-rates
+        duplex: true
+      Other:
+        type: scan
+        file-name: bill-other
+  Invoices:
+    type: menu
+    options:
+      Medical:
+        type: scan
+        file-name: invoice-medical
+      House:
+        type: scan
+        file-name: invoice-house
+      Other:
+        type: scan
+        file-name: invoice-other
+  Other:
+    type: menu
+    options:
+      Bunnings: 
+        type: scan
+        file-name: reciept-bunnings
+      Misc:
+        type: scan
+        file-name: misc
+      Reciept:
+        type: scan
+        file-name: reciept-other
+
+People:
+  - Michael
+  - Luke
+
+Home Directory: /mnt/paperless
+Log Directory: /home/michael/Documents/scanningSystem/

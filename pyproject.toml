@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scanning-gui"
+version = "0.1.0"
+dependencies = ["PyQt6", "Pillow", "saneyaml"]
+
+[project.scripts]
+scanning-gui = "main:main"
+
+[tool.setuptools]
+py-modules = ["main"]
