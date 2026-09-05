@@ -11,7 +11,7 @@ import pwd
 import subprocess 
 from time import sleep
 import datetime
-   QApplication.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
+QApplication.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
 UTSUSHI_EXECUTABLE = os.environ.get("SCANNING_UTSUSHI_EXECUTABLE")
 
 
