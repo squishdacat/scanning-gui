@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QGridLayout, QDialog, QMessageBox, QVBoxLayout, QSizePolicy, QComboBox
 from PyQt6.QtGui import QColor, QPalette, QScreen 
 from PyQt6.QtCore import Qt
-
 from PIL import Image
 from io import BytesIO
 import os
@@ -11,7 +10,6 @@ import pwd
 import subprocess 
 from time import sleep
 import datetime
-QApplication.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
 UTSUSHI_EXECUTABLE = os.environ.get("SCANNING_UTSUSHI_EXECUTABLE")
 
 
@@ -181,6 +179,7 @@ class MainWindow(QMainWindow):
 def main():
     global app, fullYamlConfig, homeDir, logDir, YAML_CONFIG, window, currentCorrespondent, UTSUSHI_EXECUTABLE
     app = QApplication([])
+    app.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
     config_path = os.environ.get("SCANNING_GUI_CONFIG", "menu.yaml")
     fullYamlConfig = load(open(config_path).read())
     homeDir = fullYamlConfig["Home Directory"]
