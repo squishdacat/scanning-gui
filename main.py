@@ -187,9 +187,7 @@ def main():
     window = MainWindow()
     if "People" in fullYamlConfig and isinstance(fullYamlConfig["People"], list):
         currentCorrespondent = {"index": 0, "name": fullYamlConfig["People"][0]}
-    win = window.windowHandle()
-    win.setScreen(app.primaryScreen())
-    win.showFullScreen()
+    window.showFullScreen()
     app.exec()
 
 if __name__ == "__main__":
