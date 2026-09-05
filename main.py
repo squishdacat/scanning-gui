@@ -179,7 +179,7 @@ class MainWindow(QMainWindow):
 def main():
     global app, fullYamlConfig, homeDir, logDir, YAML_CONFIG, window, currentCorrespondent, UTSUSHI_EXECUTABLE
     app = QApplication([])
-    app.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
+    #app.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
     config_path = os.environ.get("SCANNING_GUI_CONFIG", "menu.yaml")
     fullYamlConfig = load(open(config_path).read())
     homeDir = fullYamlConfig["Home Directory"]
