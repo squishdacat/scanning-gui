@@ -11,7 +11,23 @@ import subprocess
 from time import sleep
 import datetime
 UTSUSHI_EXECUTABLE = os.environ.get("SCANNING_UTSUSHI_EXECUTABLE")
+def main():
+    global app, fullYamlConfig, homeDir, logDir, YAML_CONFIG, window, currentCorrespondent, UTSUSHI_EXECUTABLE
+    app = QApplication([])
+    #app.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
+    config_path = os.environ.get("SCANNING_GUI_CONFIG", "menu.yaml")
+    fullYamlConfig = load(open(config_path).read())
+    homeDir = fullYamlConfig["Home Directory"]
+    logDir = fullYamlConfig["Log Directory"]
+    YAML_CONFIG = fullYamlConfig["Menu"]
+    window = MainWindow()
+    if "People" in fullYamlConfig and isinstance(fullYamlConfig["People"], list):
+        currentCorrespondent = {"index": 0, "name": fullYamlConfig["People"][0]}
+    window.showFullScreen()
+    app.exec()
 
+if __name__ == "__main__":
+    main()
 
 
 def change_user(uid, gid=None):
@@ -176,20 +192,4 @@ class MainWindow(QMainWindow):
                             dlg.setText(f"An unexpected error occured, see log at {logFilePath}")
                         dlg.exec()
 
-def main():
-    global app, fullYamlConfig, homeDir, logDir, YAML_CONFIG, window, currentCorrespondent, UTSUSHI_EXECUTABLE
-    app = QApplication([])
-    #app.setAttribute(Qt.ApplicationAttribute.AA_SynthesizeMouseForUnhandledTouchEvents, True)
-    config_path = os.environ.get("SCANNING_GUI_CONFIG", "menu.yaml")
-    fullYamlConfig = load(open(config_path).read())
-    homeDir = fullYamlConfig["Home Directory"]
-    logDir = fullYamlConfig["Log Directory"]
-    YAML_CONFIG = fullYamlConfig["Menu"]
-    window = MainWindow()
-    if "People" in fullYamlConfig and isinstance(fullYamlConfig["People"], list):
-        currentCorrespondent = {"index": 0, "name": fullYamlConfig["People"][0]}
-    window.showFullScreen()
-    app.exec()
 
-if __name__ == "__main__":
-    main()
